@@ -1,0 +1,70 @@
+body{
+    
+    min-height: 100vh;
+    display: flex;
+    justify-content:center;
+   
+   margin: 0;
+    font-family: Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.blog{
+	
+     width: 520px;
+    height: 100%;
+   
+    
+}
+ h1{
+    text-align: center;
+    padding:10px;
+}
+.blog-title{
+   
+    width: 400px;
+    height: 40px;
+    outline:0;
+    border:none;
+    
+    
+}
+input{
+	font-size:30px;
+}
+input:focus{
+    outline: 0;
+    box-shadow: 0 1px 0 0 black;
+    transition:-0.7s;
+}
+textarae{
+	font-size:20px;
+	padding:0px;
+}
+textarea:focus{
+	 outline: 0;
+    border:none;
+}
+
+#blog-btn{
+    
+    width: 200px;
+    height: 50px;
+    background-color:black;
+    color:white ;
+    border-radius: 4px;
+    border: 2px solid black;
+}
+#blog-btn:hover{
+   background-color:white;
+   color:black
+}
+
+.blog-btn
+{width: 100%;
+    
+    display: flex;
+    justify-content:center;
+    align-content:center;
+   
+
+}

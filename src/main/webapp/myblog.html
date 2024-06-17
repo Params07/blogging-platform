@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style >
+ body {
+    margin: 0;
+    font-family: Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+.nav {
+    
+     display: flex;
+  justify-content: center;
+    background-color:black;
+   
+    padding: 8px;
+    text-align: center;
+    color:white;
+  }
+  .nav a{
+    
+    color: antiquewhite;
+    text-decoration: none;
+    border-radius:8px;
+    font-size:large;
+    padding:10px;
+  }
+  .nav a:hover{
+    background-color:lightgray;
+    color: #000;
+
+  }
+        
+        
+       #contents{
+         margin:20px;
+         padding:25px;
+         width:80%;
+         
+       
+       }
+       .nav-inside{
+       padding:20px;
+       
+       }
+      
+        
+
+</style>
+</head>
+<body>
+<div class="nav">
+        <div class="nav-inside">
+        <a href="index.jsp">Home</a>
+        </div>
+              <div class="nav-inside"><a href="myblog.html">myblogs</a>
+              </div> 
+            <div class="nav-inside">
+                        <a id="log" href="upload.jsp">upload</a>
+            </div>
+            <div class="nav-inside">
+            <a id="login" href="login.jsp">Login</a>
+            </div>
+            
+           <div class="nav-inside">
+            <a id= "log-out">Logout</a>
+           </div>
+            
+          </div>
+          <div style="text-align:center;">
+          <h3>Myblogs</h3>
+          </div>
+         <div style="display:flex; justify-content:center;">
+         
+         <div id="contents">
+</body>
+<script>
+function blogs(){
+	const xhr = new XMLHttpRequest();
+	var param = "demo3?user="+localStorage.getItem("credentials");
+	xhr.open("GET",param,true);
+	xhr.onreadystatechange = function () {
+	                if (xhr.readyState == 4 && xhr.status == 200) {
+	                    
+	                    
+	const x = document.getElementById("contents")
+	JSON.parse(xhr.responseText).forEach(function(data) {
+		var d = data.date;
+		
+	    x.insertAdjacentHTML('beforeend', 
+	    		"<form id='" + data.id + "'>"+
+	        "<div  style='float: left; width: 30%; padding: 0 10px 10px 10px;'>"  +
+	        "<div style='box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); padding: 12px; border-radius:6px;'>" +
+	        "<p  style='font-size:15px;'> " + data.username + "<i> :(author)</i>"+"</p>" +
+	        "<p>" + data.title + "</p>" +
+	        "<p style='font-size:10px;'>" + d.slice(0, 10) + "</p>" +
+	        "<button type='submit' >delete</button>"+
+	        "</div>" +
+	        
+	        "</div>"+
+	        "</form>"
+	    );
+	    document.getElementById(data.id).addEventListener("submit", function(e) {
+	    	
+	    	
+	    	xhr1 = new XMLHttpRequest();
+	    	var param = "demo3?user="+data.id;
+	    	xhr1.open("POST",param,true);
+	    	xhr1.onreadystatechange = function () {
+	            if (xhr1.readyState == 4 && xhr1.status == 200) {
+	            	console.log(xhr1.responseText);
+	            }}
+	    	xhr1.send();
+	    	
+	       console.log("clicked herer");
+	    });
+	    
+	});
+	                    
+	                }
+	            };
+
+
+	xhr.send();}
+if(localStorage.getItem("credentials")== 'log-out')
+{
+	document.getElementById("log-out").style.display="none";
+	alert('login to your blogs!!');
+	
+	
+}else{
+	document.getElementById("login").style.display="none";
+	blogs();
+}
+
+
+
+document.getElementById("log-out").addEventListener('click',function(){
+	document.getElementById("log-out").style.display="none";
+	window.location.reload();
+	localStorage.setItem("credentials",'log-out');
+})
+
+
+</script>
+</html>
